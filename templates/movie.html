@@ -4,16 +4,17 @@
 <div class="row g-4">
   <div class="col-md-4">
     <div class="ratio ratio-2x3 bg-secondary-subtle d-flex align-items-center justify-content-center">
-      <span class="text-secondary">No Poster</span>
+  <img src="{{ movie.poster if movie.poster else url_for('static', filename='default-poster.jpg') }}" alt="{{ movie.title }} poster" class="img-fluid h-100 w-100 object-fit-cover">
     </div>
   </div>
   <div class="col-md-8">
     <h2>{{ movie.title }}</h2>
     <p class="text-muted">{{ movie.description }}</p>
-    <div class="d-flex gap-2">
-      <a class="btn btn-success" href="{{ download_link }}"><i class="bi bi-download"></i> Download</a>
-      <a class="btn btn-outline-primary" href="{{ watch_link }}">Watch Now</a>
-    </div>
+    <ul class="list-unstyled mb-2">
+      <li><strong>Release Date:</strong> {{ movie.release_date }}</li>
+      <li><strong>Genres:</strong> {{ movie.genre }}</li>
+      <li><strong>Rating:</strong> {{ movie.vote_average }}</li>
+    </ul>
   </div>
 </div>
 
@@ -25,11 +26,11 @@
   <div class="col-6 col-md-3">
     <div class="card h-100">
       <div class="ratio ratio-2x3 bg-secondary-subtle d-flex align-items-center justify-content-center">
-        <span class="text-secondary">No Poster</span>
+  <img src="{{ r.poster if r.poster else url_for('static', filename='default-poster.jpg') }}" alt="{{ r.title }} poster" class="img-fluid h-100 w-100 object-fit-cover">
       </div>
       <div class="card-body">
         <h6 class="card-title">{{ r.title }}</h6>
-        <a href="{{ url_for('movie_detail', identifier=r.identifier) }}" class="btn btn-sm btn-outline-secondary">Open</a>
+        <a href="{{ url_for('movie_detail', movie_id=r.id) }}" class="btn btn-sm btn-outline-secondary">Open</a>
       </div>
     </div>
   </div>
