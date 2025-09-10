@@ -5,7 +5,7 @@ from flask import Flask, render_template, request, abort, Response, send_file, u
 from urllib.parse import quote
 
 # ====== CONFIG ======
-MOVIES_ROOT = Path(r"C:\\Users\\pc\\Videos").resolve()
+MOVIES_ROOT = Path(r"C:\\Users\\pc\\Videos\\Animation").resolve()
 ALLOWED_EXTS = {".mp4", ".mkv", ".avi", ".mov", ".flv", ".wmv"}
 APP_TITLE = "Movie Download & Streaming"
 
@@ -149,5 +149,8 @@ def stream_movie(identifier):
     return send_file(path, mimetype=mime)
 
 if __name__ == "__main__":
+    print(f"[INFO] MOVIES_ROOT is set to: {MOVIES_ROOT}")
+    movies = list_movies(MOVIES_ROOT)
+    print(f"[INFO] Found {len(movies)} movie(s) in MOVIES_ROOT.")
     # Production hint: use `gunicorn 'app:app'` or `waitress-serve --listen=0.0.0.0:5000 app:app`
     app.run(host="0.0.0.0", port=5000, debug=True)
