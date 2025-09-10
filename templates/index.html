@@ -1,0 +1,28 @@
+{% extends "_base.html" %}
+{% block content %}
+<h2 class="mb-4">{{ title }}</h2>
+{% if not movies %}
+  <div class="alert alert-warning">No movies found. Place your files in the external <code>movies/</code> folder.</div>
+{% else %}
+<div class="row g-3">
+  {% for m in movies %}
+  <div class="col-6 col-md-4 col-lg-3">
+    <div class="card h-100 shadow-sm">
+      <div class="ratio ratio-2x3 bg-secondary-subtle d-flex align-items-center justify-content-center">
+        <span class="text-secondary">No Poster</span>
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h6 class="card-title">{{ m.title }}</h6>
+        <div class="mt-auto">
+          <a class="btn btn-primary btn-sm" href="{{ url_for('movie_detail', identifier=m.identifier) }}">Details</a>
+        </div>
+      </div>
+      <div class="card-footer small text-muted">
+        Category: {{ m.category }}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

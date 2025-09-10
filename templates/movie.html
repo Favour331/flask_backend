@@ -1,0 +1,39 @@
+{% extends "_base.html" %}
+{% block content %}
+<a href="/" class="btn btn-link">&larr; Back</a>
+<div class="row g-4">
+  <div class="col-md-4">
+    <div class="ratio ratio-2x3 bg-secondary-subtle d-flex align-items-center justify-content-center">
+      <span class="text-secondary">No Poster</span>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <h2>{{ movie.title }}</h2>
+    <p class="text-muted">{{ movie.description }}</p>
+    <div class="d-flex gap-2">
+      <a class="btn btn-success" href="{{ download_link }}"><i class="bi bi-download"></i> Download</a>
+      <a class="btn btn-outline-primary" href="{{ watch_link }}">Watch Now</a>
+    </div>
+  </div>
+</div>
+
+{% if recommendations %}
+<hr class="my-4"/>
+<h4>Recommended</h4>
+<div class="row g-3">
+  {% for r in recommendations %}
+  <div class="col-6 col-md-3">
+    <div class="card h-100">
+      <div class="ratio ratio-2x3 bg-secondary-subtle d-flex align-items-center justify-content-center">
+        <span class="text-secondary">No Poster</span>
+      </div>
+      <div class="card-body">
+        <h6 class="card-title">{{ r.title }}</h6>
+        <a href="{{ url_for('movie_detail', identifier=r.identifier) }}" class="btn btn-sm btn-outline-secondary">Open</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+{% endblock %}
