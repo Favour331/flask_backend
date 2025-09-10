@@ -49,6 +49,7 @@ def load_all():
 @app.route("/")
 def index():
     movies = load_all()
+    print(f"[DEBUG] Movies passed to template: {movies}")
     return render_template("index.html", movies=movies, title=APP_TITLE)
 
 @app.route("/category/<path:name>")
